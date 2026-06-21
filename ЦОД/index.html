@@ -1,0 +1,724 @@
+<self-service-header>
+  <div class="self-service-header-inner">
+    <a href="/self-service" class="brand" title="Главная страница" aria-label="Главная страница">
+      <span class="brand-logo">
+        <img class="brand-logo-img" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781643292.1939795-f35e4d26bbaa9b2b48d0981023f31399dd386fd6b28f970ed32db7460c3e35aa/%D1%80-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81.svg" alt="Р-Сервис">
+      </span>
+      <span class="brand-content">
+        <span class="brand-name">Р-Сервис</span>
+        <span class="brand-caption">Портал самообслуживания</span>
+      </span>
+      <h1 class="sr-only">Р-Сервис Портал</h1>
+    </a>
+
+    <div class="global-user-menu">
+      <a class="global-user-menu-btn global-search-link" title="Поиск" href="/self-service/search" aria-label="Поиск">
+        <i class="ii icon-search"></i>
+      </a>
+
+      <button class="global-menu-toggler" type="button" data-action="navigation-menu-toggler" title="Меню навигации" aria-label="Меню навигации">
+        <i class="ii icon-hamburger"></i>
+
+        {% if count.navigation_menu > 0 %}
+          <span class="navigation-menu-badge"></span>
+        {% endif %}
+      </button>
+
+      {% if nav.shop.visible %}
+        <a class="global-user-menu-btn" title="{{ shopping_cart.name }}" href="{{ shopping_cart.url }}" aria-label="{{ shopping_cart.name }}">
+          <i class="ii icon-cart"></i>
+          <span class="shopping-cart-badge" data-action="shopping-cart-counter">
+            {{ count.shopping_cart }}
+          </span>
+        </a>
+      {% endif %}
+
+      <self-service-color-mode-picker
+        class="header-theme-picker"
+        data-placeholder="Тема">
+      </self-service-color-mode-picker>
+
+      <button class="global-user-menu-toggler" type="button" data-action="user-menu-toggler" title="Мой профиль" aria-label="Мой профиль">
+        {% if user.avatar.url %}
+          <img class="avatar" alt="{{ user.name }}" src="{{ user.avatar.url }}">
+        {% else %}
+          <div class="avatar initials initials-length-{{ user.avatar.initials | size }}">{{ user.avatar.initials }}</div>
+        {% endif %}
+      </button>
+
+      <self-service-user-menu>
+        <ul role="menu">
+          <li class="user-info">
+            {% if user.avatar.url %}
+              <img class="avatar" alt="{{ user.name }}" src="{{ user.avatar.url }}">
+            {% else %}
+              <div class="avatar initials initials-length-{{ user.avatar.initials | size }}">{{ user.avatar.initials }}</div>
+            {% endif %}
+
+            <span class="user-info-name">{{ user.name }}</span>
+            <small class="user-info-position">{{ user.job_title }}</small>
+          </li>
+
+          <li role="menuitem">
+            <a href="{{ nav.profile.url }}">
+              <i class="ii icon-person"></i>
+              {{ nav.profile.name }}
+            </a>
+          </li>
+
+          <li role="menuitem">
+            <a href="/logout">
+              <i class="ii icon-power"></i>
+              Выйти из профиля
+            </a>
+          </li>
+        </ul>
+      </self-service-user-menu>
+    </div>
+
+    <self-service-nav data-nav-variant="dropdown">
+      <ul role="menu">
+        {% for nav_item in list.nav_items %}
+          {% if nav_item.visible %}
+            <li role="menuitem" class="nav-item-{{ nav_item.key }}{% if nav_item.selected %} selected{% endif %}">
+              <a href="{{ nav_item.url }}">
+                <i class="ii icon-{{ nav_item.icon.key }}"></i>
+                <span class="label">{{ nav_item.name }}</span>
+
+                {% if nav_item.count > 0 %}
+                  <span class="count">{{ nav_item.count }}</span>
+                {% endif %}
+
+                {% if nav_item.time_spent %}
+                  <span class="count time-spent">{{ nav_item.time_spent }}</span>
+                {% endif %}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </self-service-nav>
+  </div>
+
+  <div class="rsvc-environment-badge rsvc-environment-badge--demo" role="note" aria-label="Текущая среда: Demo">
+    <span class="rsvc-environment-badge__full">Demo-среда</span>
+    <span class="rsvc-environment-badge__short" aria-hidden="true">Demo</span>
+  </div>
+</self-service-header>
+
+<self-service-homepage>
+  <div class="hero">
+    <div class="hero-layer" aria-hidden="true">
+      <div class="hero-orbit-deco hero-orbit-deco-1">
+        <span class="hero-orbit-ring hero-orbit-ring-1"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-2"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-3"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-1"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-2"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-3"></span>
+        <span class="hero-orbit-core"></span>
+      </div>
+
+      <div class="hero-orbit-deco hero-orbit-deco-2">
+        <span class="hero-orbit-ring hero-orbit-ring-1"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-2"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-3"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-1"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-2"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-3"></span>
+        <span class="hero-orbit-core"></span>
+      </div>
+
+      <div class="hero-orbit-deco hero-orbit-deco-3">
+        <span class="hero-orbit-ring hero-orbit-ring-1"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-2"></span>
+        <span class="hero-orbit-ring hero-orbit-ring-3"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-1"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-2"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-3"></span>
+        <span class="hero-orbit-core"></span>
+      </div>
+
+      <div class="hero-visual-image" aria-hidden="true">
+        <img class="hero-visual-img" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781643921.2876678-3cde036837174524aa153452c445076d3e0c47358662d52516ebe1cde7d60507/photo_2026-06-05_11-34-34%20%282%29.jpg" alt="">
+      </div>
+
+      <div class="hero-service-visuals" aria-hidden="true">
+        <img class="hero-service-img hero-service-img--enterprise" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781646510.1226804-dd6fb020ca94a983a736a7ce2e8ae54a251b53b9ecb608c16c6979627bcf9377/enterprise.png" alt="">
+        <img class="hero-service-img hero-service-img--provider" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781646523.3628454-de0a230abc35c7d158c0ed867ce427de27b788e82de9858d13f5cac89e25c2c1/service-provider.png" alt="">
+        <img class="hero-service-img hero-service-img--government" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781646536.9126587-a711ad2a358c38579434786083d78653982eeee3add7cb960b9f19a4813ba9bf/government1.png" alt="">
+      </div>
+    </div>
+
+    <div class="hero-user-name">
+      <span class="hero-kicker hero-logo-badge" aria-hidden="true">
+        <img class="hero-logo-badge-img" src="https://ec6a1843-6193-40fc-9c40-978edc39ddb2.selstorage.ru/instances/rrt1/media/189/2026/06/16/581/1781643921.2876678-3cde036837174524aa153452c445076d3e0c47358662d52516ebe1cde7d60507/photo_2026-06-05_11-34-34%20%282%29.jpg" alt="">
+      </span>
+
+      <h1>
+        Добро пожаловать на портал самообслуживания Р-Сервис,<br>
+        {{ user.name }}!
+      </h1>
+
+      <p class="hero-description">
+        Единый контур управления Услугами, Запросами, Оповещениями и Знаниями в ESM/SIAM-подходе.
+      </p>
+    </div>
+
+    <div class="hero-search">
+      <self-service-search data-placeholder="Как мы можем помочь Вам сегодня?"></self-service-search>
+    </div>
+  </div>
+
+  <section class="widgets widgets--has-user-statistics widgets--rsvc-usage">
+    <self-service-user-statistics>
+      <section class="rsvc-usage-widget" aria-labelledby="user-statistics-heading">
+        <header class="rsvc-usage-header">
+          <div class="rsvc-usage-title-row">
+            <span id="user-statistics-heading" class="rsvc-usage-heading">{{ user_statistics_labels.heading }}</span>
+
+            {% if user_statistics_labels.badge != blank %}
+              <span class="rsvc-usage-badge">{{ user_statistics_labels.badge }}</span>
+            {% endif %}
+          </div>
+        </header>
+
+        <ul class="rsvc-usage-grid" id="user-statistics-cards" aria-label="{{ user_statistics_labels.heading }}">
+          {% for card in user_statistics_layout %}
+            {% if card.count != blank %}
+              <li class="rsvc-usage-card rsvc-usage-card--{{ card.variant }}" title="{{ card.tooltip }}">
+                <div class="rsvc-usage-card-visual" aria-hidden="true">
+                  <div class="rsvc-orbit-icon rsvc-usage-orbit">
+                    <span class="rsvc-orbit-ring rsvc-orbit-ring-1"></span>
+                    <span class="rsvc-orbit-ring rsvc-orbit-ring-2"></span>
+                    <span class="rsvc-orbit-ring rsvc-orbit-ring-3"></span>
+                    <span class="rsvc-orbit-dot rsvc-orbit-dot-1"></span>
+                    <span class="rsvc-orbit-dot rsvc-orbit-dot-2"></span>
+                    <span class="rsvc-orbit-dot rsvc-orbit-dot-3"></span>
+                    <span class="rsvc-orbit-core">
+                      <i class="ii icon-{{ card.icon }} rsvc-usage-card-icon"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <p class="rsvc-usage-card-count">{{ card.count }}</p>
+
+                <div class="rsvc-usage-card-copy">
+                  <p class="rsvc-usage-card-title">{{ card.title }}</p>
+                  <p class="rsvc-usage-card-description">{{ card.description }}</p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
+    </self-service-user-statistics>
+  </section>
+
+  <section id="quick-actions-heading" class="widget-section white widget-section--quick-actions">
+    <div class="widgets cols-md-4 g-30">
+      <a href="{{ nav.new_request.url }}" class="rsvc-action-card rsvc-action-card--primary">
+        <div class="rsvc-orbit-icon rsvc-action-card__orbit" aria-hidden="true">
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-1"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-2"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-3"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-1"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-2"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-3"></span>
+          <span class="rsvc-orbit-core">
+            <i class="ii icon-new-request rsvc-action-card__icon"></i>
+          </span>
+        </div>
+        <div class="rsvc-action-card__title">Новый запрос</div>
+        <div class="rsvc-action-card__text">Задайте вопрос, оформите обращение или сообщите о проблеме</div>
+      </a>
+
+      <a href="{{ nav.broadcasts.url }}" class="rsvc-action-card rsvc-action-card--broadcasts">
+        <div class="rsvc-orbit-icon rsvc-action-card__orbit" aria-hidden="true">
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-1"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-2"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-3"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-1"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-2"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-3"></span>
+          <span class="rsvc-orbit-core">
+            <i class="ii icon-broadcast rsvc-action-card__icon"></i>
+          </span>
+        </div>
+        <div class="rsvc-action-card__title">Мои оповещения</div>
+        <div class="rsvc-action-card__text">Следите за важными уведомлениями и изменениями по услугам</div>
+      </a>
+
+      <a href="{{ nav.requests.url }}" class="rsvc-action-card rsvc-action-card--requests">
+        <div class="rsvc-orbit-icon rsvc-action-card__orbit" aria-hidden="true">
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-1"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-2"></span>
+          <span class="rsvc-orbit-ring rsvc-orbit-ring-3"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-1"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-2"></span>
+          <span class="rsvc-orbit-dot rsvc-orbit-dot-3"></span>
+          <span class="rsvc-orbit-core">
+            <i class="ii icon-{{ nav.requests.icon.key }} rsvc-action-card__icon"></i>
+          </span>
+        </div>
+        <div class="rsvc-action-card__title">Запросы</div>
+        <div class="rsvc-action-card__text">Отслеживайте статус обращений и ход выполнения задач</div>
+      </a>
+    </div>
+  </section>
+
+  {% if nav.services.visible or nav.favorites.visible or list.recently_used.request_templates.size > 0 or list.popular.request_templates.size > 0 or list.latest.request_templates.size > 0 %}
+    <section class="widgets rsvc-service-catalog-hub" aria-labelledby="rsvc-service-catalog-heading">
+      <div class="rsvc-section-headline rsvc-service-catalog-headline">
+        <p class="widgets-section-kicker">Каталог</p>
+      </div>
+
+      {% if nav.services.visible or nav.favorites.visible %}
+        <div class="rsvc-service-catalog-shortcuts">
+          {% if nav.services.visible %}
+            <div class="rsvc-service-catalog-shortcut">
+              <a class="my-services-widget" href="{{ nav.services.url }}" aria-label="{{ nav.services.name }}">
+                <span class="my-services-widget__icon" aria-hidden="true">
+                  <i class="ii icon-{{ nav.services.icon.key }}"></i>
+                </span>
+
+                <span class="my-services-widget__content">
+                  <span class="my-services-widget__title">{{ nav.services.name }}</span>
+                  <span class="my-services-widget__description">
+                    Перейти к доступным услугам.
+                  </span>
+                </span>
+
+                <span class="my-services-widget__arrow" aria-hidden="true">
+                  <i class="ii icon-single-chevron-right"></i>
+                </span>
+              </a>
+            </div>
+          {% endif %}
+
+          {% if nav.favorites.visible %}
+            <div class="rsvc-service-catalog-shortcut">
+              <a class="my-services-widget" href="{{ nav.favorites.url }}" aria-label="{{ nav.favorites.name }}">
+                <span class="my-services-widget__icon" aria-hidden="true">
+                  <i class="ii icon-{{ nav.favorites.icon.key }}"></i>
+                </span>
+
+                <span class="my-services-widget__content">
+                  <span class="my-services-widget__title">{{ nav.favorites.name }}</span>
+                  <span class="my-services-widget__description">
+                    Перейти к избранному.
+                  </span>
+                </span>
+
+                <span class="my-services-widget__arrow" aria-hidden="true">
+                  <i class="ii icon-single-chevron-right"></i>
+                </span>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="rsvc-section-headline rsvc-service-catalog-title-block">
+        <h2 id="rsvc-service-catalog-heading" class="widgets-section-title">Шаблоны запросов</h2>
+        <p class="rsvc-section-subtitle">Быстрый доступ к шаблонам: недавно использованные, популярные и новые.</p>
+      </div>
+
+      {% assign rendered_template_urls = '|' %}
+      <div class="rsvc-unified-grid rsvc-unified-grid--templates">
+        {% if list.recently_used.request_templates.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-template-panel rsvc-template-panel--recent">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Быстрый доступ</span>
+                <h3>Недавно использованные</h3>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.recently_used.request_templates limit: 5 %}
+                {% assign template_key = record.url | append: '|' %}
+                {% unless rendered_template_urls contains template_key %}
+                  <li>
+                    <a href="{{ record.url }}">
+                      <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-new-request"></i></span>
+                      <span class="rsvc-list-copy">
+                        <strong>{{ record.subject }}</strong>
+                        <small>{{ record.registration_hints | truncate: 120 }}</small>
+                      </span>
+                    </a>
+                  </li>
+                  {% assign rendered_template_urls = rendered_template_urls | append: record.url | append: '|' %}
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.popular.request_templates.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-template-panel rsvc-template-panel--popular">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Популярное</span>
+                <h3>Часто используют</h3>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.popular.request_templates limit: 5 %}
+                {% assign template_key = record.url | append: '|' %}
+                {% unless rendered_template_urls contains template_key %}
+                  <li>
+                    <a href="{{ record.url }}">
+                      <span class="rsvc-list-icons rsvc-list-icons--with-badge" aria-hidden="true">
+                        <i class="ii icon-new-request"></i>
+                        <span class="rsvc-popularity-badge" title="Использований: {{ record.count }}">{{ record.count }}</span>
+                      </span>
+                      <span class="rsvc-list-copy">
+                        <strong>{{ record.subject }}</strong>
+                        <small>{{ record.registration_hints | truncate: 120 }}</small>
+                      </span>
+                    </a>
+                  </li>
+                  {% assign rendered_template_urls = rendered_template_urls | append: record.url | append: '|' %}
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.latest.request_templates.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-template-panel rsvc-template-panel--latest">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Новое</span>
+                <h3>Новые шаблоны</h3>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.latest.request_templates limit: 5 %}
+                {% assign template_key = record.url | append: '|' %}
+                {% unless rendered_template_urls contains template_key %}
+                  <li>
+                    <a href="{{ record.url }}">
+                      <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-new-request"></i></span>
+                      <span class="rsvc-list-copy">
+                        <strong>{{ record.subject }}</strong>
+                        <small>{{ record.registration_hints | truncate: 120 }}</small>
+                      </span>
+                      <span class="rsvc-list-date">{{ record.created_at.short }}</span>
+                    </a>
+                  </li>
+                  {% assign rendered_template_urls = rendered_template_urls | append: record.url | append: '|' %}
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+
+  {% if list.broadcasts.size > 0 %}
+    <section class="widgets rsvc-broadcast-hub" aria-labelledby="rsvc-broadcast-heading">
+      <div class="rsvc-section-headline">
+        <p class="widgets-section-kicker">Оповещения</p>
+        <h2 id="rsvc-broadcast-heading" class="widgets-section-title">Важные сообщения и объявления</h2>
+        <span class="rsvc-section-count">{{ count.broadcasts }}</span>
+        <p class="rsvc-section-subtitle">Актуальные уведомления, которые требуют внимания пользователя.</p>
+      </div>
+
+      <self-service-carousel data-transition-delay="5000" data-autoplay="true" data-show-pagination-controls="true" class="rsvc-broadcast-carousel">
+        {% for broadcast in list.broadcasts limit: 5 %}
+          <self-service-carousel-slide>
+            <div class="broadcast rsvc-broadcast-card broadcast-{{ broadcast.icon.key }}" data-action="{{ broadcast.action }}" data-action-attrs="{{ broadcast.action_attrs }}">
+              <div class="rsvc-list-icon rsvc-broadcast-icon" aria-hidden="true">
+                <i class="ii icon-{{ broadcast.icon.key }}"></i>
+              </div>
+
+              <div class="rsvc-broadcast-body">
+                <h5>{{ broadcast.icon.name }}</h5>
+                <div class="broadcast-message">{{ broadcast.message.html }}</div>
+              </div>
+
+              {% for button in broadcast.buttons limit: 2 %}
+                <button class="btn btn-lg rsvc-broadcast-btn" role="button" data-action="{{ button.action }}" data-action-attrs="{{ button.action_attrs }}">
+                  {{ button.name }}
+                </button>
+              {% endfor %}
+            </div>
+          </self-service-carousel-slide>
+        {% endfor %}
+      </self-service-carousel>
+    </section>
+  {% endif %}
+
+  {% if list.inbox_items.size > 0 or list.open_requests.size > 0 or list.requests_waiting_for_me.size > 0 or list.approvals.size > 0 or list.completed_requests.size > 0 or list.assets.size > 0 %}
+    <section class="widgets rsvc-workspace-widgets" aria-labelledby="rsvc-workspace-heading">
+      <div class="rsvc-section-headline">
+        <p class="widgets-section-kicker">Рабочая зона</p>
+        <h2 id="rsvc-workspace-heading" class="widgets-section-title">Мои процессы и объекты</h2>
+        <p class="rsvc-section-subtitle">Короткие списки того, что требует контроля: входящие, ожидания, согласования, активы и завершённые обращения.</p>
+      </div>
+
+      <div class="rsvc-workspace-grid">
+        {% if list.inbox_items.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-widget-panel--accent">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Входящие</span>
+                <h3>Мои входящие</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Входящих: {{ count.inbox }}">{{ count.inbox }}</span>
+                <a class="rsvc-widget-link" href="{{ nav.inbox.url }}">Все</a>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.inbox_items limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-inbox"></i></span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.subject }}</strong>
+                      <small>{{ record.last_note.text | truncate: 120 }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.requests_waiting_for_me.size > 0 %}
+          <article class="rsvc-widget-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Ожидание</span>
+                <h3>Ждут моего действия</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Ждут моего действия: {{ count.requests_waiting_for_me }}">{{ count.requests_waiting_for_me }}</span>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.requests_waiting_for_me limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-request"></i></span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.subject }}</strong>
+                      <small>{{ record.last_note.text | truncate: 120 }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.open_requests.size > 0 %}
+          <article class="rsvc-widget-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Контроль</span>
+                <h3>Открытые запросы</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Открытых запросов: {{ count.open_requests }}">{{ count.open_requests }}</span>
+                <a class="rsvc-widget-link" href="{{ nav.requests.url }}?view_state=open">Все</a>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.open_requests limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-request"></i></span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.subject }}</strong>
+                      <small>{% if record.last_note.person.name != blank %}{{ record.last_note.person.name }}: {% endif %}{{ record.last_note.text | truncate: 105 }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.approvals.size > 0 %}
+          <article class="rsvc-widget-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Согласования</span>
+                <h3>На согласовании</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Согласований: {{ count.approvals }}">{{ count.approvals }}</span>
+                <a class="rsvc-widget-link" href="{{ nav.approvals.url }}">Все</a>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.approvals limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-list-icons rsvc-list-icons--approval" aria-hidden="true">
+                      <span class="rsvc-approval-mark">✓</span>
+                    </span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.subject }}</strong>
+                      <small>{{ record.last_note.text | truncate: 120 }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.assets.size > 0 %}
+          <article class="rsvc-widget-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">CMDB</span>
+                <h3>Мои активы</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Активов: {{ count.assets }}">{{ count.assets }}</span>
+                <a class="rsvc-widget-link" href="{{ nav.assets.url }}">Все</a>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list rsvc-mini-list--assets">
+              {% for record in list.assets limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-asset-avatar" aria-hidden="true">
+                      {% if record.avatar.url %}
+                        <img src="{{ record.avatar.url }}" alt="">
+                      {% else %}
+                        <i class="ii icon-asset"></i>
+                      {% endif %}
+                    </span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.name }}</strong>
+                      <small class="asset-status-{{ record.status.key }}">{{ record.status.name }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.completed_requests.size > 0 %}
+          <article class="rsvc-widget-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">История</span>
+                <h3>Завершённые запросы</h3>
+              </div>
+              <div class="rsvc-widget-panel-actions">
+                <span class="rsvc-widget-count" aria-label="Завершённых запросов: {{ list.completed_requests.size }}">{{ list.completed_requests.size }}</span>
+                <a class="rsvc-widget-link" href="{{ nav.requests.url }}?view_state=completed">Все</a>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list">
+              {% for record in list.completed_requests limit: 4 %}
+                <li>
+                  <a href="{{ record.url }}">
+                    <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-request"></i></span>
+                    <span class="rsvc-list-copy">
+                      <strong>{{ record.subject }}</strong>
+                      <small>{{ record.last_note.text | truncate: 120 }}</small>
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if list.latest.knowledge_articles.size > 0 or list.popular.knowledge_articles.size > 0 %}
+    <section class="widgets rsvc-knowledge-hub" aria-labelledby="rsvc-knowledge-hub-heading">
+      <div class="rsvc-section-headline">
+        <p class="widgets-section-kicker">База знаний</p>
+        <h2 id="rsvc-knowledge-hub-heading" class="widgets-section-title">Статьи базы знаний</h2>
+        <p class="rsvc-section-subtitle">Свежие и популярные материалы в одном блоке, без повторов.</p>
+      </div>
+
+      {% assign rendered_knowledge_urls = '|' %}
+      <div class="rsvc-unified-grid rsvc-unified-grid--knowledge">
+        {% if list.latest.knowledge_articles.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-knowledge-panel rsvc-knowledge-panel--latest">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Полезно узнать</span>
+                <h3>Последние статьи</h3>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list rsvc-knowledge-list">
+              {% for knowledge_article in list.latest.knowledge_articles limit: 4 %}
+                {% assign knowledge_key = knowledge_article.url | append: '|' %}
+                {% unless rendered_knowledge_urls contains knowledge_key %}
+                  <li>
+                    <a href="{{ knowledge_article.url }}">
+                      <span class="rsvc-list-icons" aria-hidden="true"><i class="ii icon-knowledge-article"></i></span>
+                      <span class="rsvc-list-copy">
+                        <strong>{{ knowledge_article.subject }}</strong>
+                        <small>{{ knowledge_article.text | truncate: 120 }}</small>
+                      </span>
+                    </a>
+                  </li>
+                  {% assign rendered_knowledge_urls = rendered_knowledge_urls | append: knowledge_article.url | append: '|' %}
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+
+        {% if list.popular.knowledge_articles.size > 0 %}
+          <article class="rsvc-widget-panel rsvc-knowledge-panel">
+            <header class="rsvc-widget-panel-header">
+              <div>
+                <span class="rsvc-widget-kicker">Популярное</span>
+                <h3>Часто читают</h3>
+              </div>
+            </header>
+
+            <ul class="rsvc-mini-list rsvc-knowledge-list">
+              {% for record in list.popular.knowledge_articles limit: 4 %}
+                {% assign knowledge_key = record.url | append: '|' %}
+                {% unless rendered_knowledge_urls contains knowledge_key %}
+                  <li>
+                    <a href="{{ record.url }}">
+                      <span class="rsvc-list-icons rsvc-list-icons--with-badge" aria-hidden="true">
+                        <i class="ii icon-knowledge-article"></i>
+                        <span class="rsvc-views-badge" title="Просмотров: {{ record.count }}">{{ record.count }}</span>
+                      </span>
+                      <span class="rsvc-list-copy">
+                        <strong>{{ record.subject }}</strong>
+                        <small>{{ record.text | truncate: 120 }}</small>
+                      </span>
+                    </a>
+                  </li>
+                  {% assign rendered_knowledge_urls = rendered_knowledge_urls | append: record.url | append: '|' %}
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </article>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+</self-service-homepage>
