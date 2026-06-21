@@ -8759,3 +8759,42 @@ self-service-homepage>.widgets.widgets--has-user-statistics.widgets--rsvc-usage>
 :host([data-color-mode="dark"]) .widget-section.white.widget-section--quick-actions {
   background: transparent;
 }
+
+/* Brand lockup: system name is always primary, space context is secondary. */
+.brand-content {
+  display: grid;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.brand-caption {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@media (max-width: 575px) {
+  .brand-name {
+    font-size: 17px;
+  }
+
+  .brand-caption {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    max-inline-size: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
